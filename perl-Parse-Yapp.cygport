@@ -1,5 +1,5 @@
 # -*- mode: sh; sh-shell: bash -*-
-_ml="Module::Build"
+_ml="ExtUtils::MakeMaker"
 inform " Build of perl-Parse-Yapp requires"
 inform "   $_ml"
 for _m in $_ml; do
@@ -8,15 +8,20 @@ done
 if [ "${CYGPORT_NO_ERROR-no}" == "no" ] && ! check_perl_module $_ml; then
   error " At least one required Perl module is missing."
 fi
-BUILD_REQUIRES="perl-Module-Build"
+BUILD_REQUIRES="perl-ExtUtils-MakeMaker"
+
 NAME="perl-Parse-Yapp"
+CATEGORY="Perl"
 VERSION=1.21
 RELEASE=1
+ARCH=noarch
+
 CPAN_AUTHOR="WBRASWELL"
+SUMMARY="LALR parser generator"
 HOMEPAGE="https://metacpan.org/release/WBRASWELL/Parse-Yapp-${VERSION}"
 SRC_URI="https://www.cpan.org/modules/by-module/Parse/WBRASWELL/Parse-Yapp-${VERSION}.tar.gz"
-
 LICENSE="Artistic-1.0 OR GPL-2.0-or-later"
+
 DESCRIPTION="Perl distribution Parse-Yapp, providing Perl modules:
 Parse::Yapp::Driver
 Parse::Yapp::Grammar
@@ -27,9 +32,4 @@ Parse::Yapp::Parse.
 
 Compiles yacc-like LALR grammars to generate Perl OO parser modules."
 
-[ "${CYGPORT_RPM_DIR:-no}" == "no" ] && [ -s "${PN}.src.patch" ] && PATCH_URI+=" ${PN}.src.patch"
-ARCH=noarch
-DIFF_EXCLUDES="MYMETA.*"
-
-export PERL_NO_VENDOR_DEPS=1
 inherit perl
