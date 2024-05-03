@@ -1,0 +1,10 @@
+#/bin/bash -x
+
+if [ ! -e /cygdrive/d/dev/tools/akibld/config/.ssh/cygwin ]; then
+    ssh-keygen -f /cygdrive/d/dev/tools/akibld/config/.ssh/cygwin
+    ssh-keygen -e -f /cygdrive/d/dev/tools/akibld/config/.ssh/cygwin.pub >/cygdrive/d/dev/tools/akibld/config/.ssh/cygwin.ssh2.pub
+fi    
+
+rm -rf *.gz *.noarch
+cygport perl-Parse-Yapp.cygport download
+cygport perl-Parse-Yapp.cygport all
